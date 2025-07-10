@@ -1,0 +1,18 @@
+# Azure Functions local settings
+local.settings.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+.env
+.python_packages/
+
+# VSCode/IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
