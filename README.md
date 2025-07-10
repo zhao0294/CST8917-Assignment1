@@ -120,16 +120,127 @@ func azure functionapp publish cst8917-assignment1-func
 
 ## 🧪 Testing & Verification
 
+### Local Development Testing
+
+#### 1. Start Local Function App
+```bash
+# Install dependencies (if not already done)
+pip install -r requirements.txt
+
+# Start the function app locally
+func start
+```
+
+**Expected Output**: Function app should start successfully with messages like:
+```
+Azure Functions Core Tools
+Core Tools Version: 4.x.x
+Function Runtime Version: 4.x.x
+
+Functions:
+
+        function_app: [GET,POST] http://localhost:7071/api/function_app
+```
+
+#### 2. Test Local Image Upload
+```bash
+# In a new terminal, run the verification script
+python verify_results.py
+```
+
+**Expected Results**:
+- ✅ Local settings configuration check
+- ✅ Function app files and dependencies check
+- ✅ SQL database connectivity test
+- ✅ Storage queue existence check
+- ✅ Blob containers verification
+
+#### 3. Manual Local Testing
+1. **Upload Test Image**: Place an image file in your local blob storage container
+2. **Monitor Terminal**: Watch the function app terminal for processing logs
+3. **Check Logs**: Look for messages like:
+   ```
+   Image uploaded: [filename]
+   Metadata extracted: [details]
+   SQL Database Save: [status]
+   Queue Send: [status]
+   Processing report: [status]
+   ```
+
+#### 4. Local Verification Steps
+- **Database Check**: Verify data is inserted into local SQL database
+- **Queue Check**: Confirm messages are sent to local storage queue
+- **Output Check**: Check if processing reports are generated in output container
+
 ### Python Script Verification
 - `python verify_results.py` — Checks local settings, files, SQL, queue, blob storage
 - `python test_azure_upload.py` — Uploads test image to Azure, triggers function
 - `python final_test.py` — Runs all tests and prints summary
 
+### Quick Local Testing Guide
+```bash
+# 1. Start function app
+func start
+
+# 2. In another terminal, run verification
+python verify_results.py
+
+# 3. Check results in terminal output
+# 4. Verify local database and queue manually if needed
+```
+
 ### Azure Portal Verification
-- **SQL Database**: Query `ImageMetadata` table for records
-- **Storage Account**: Check `images-input` and `output` containers
-- **Queue**: Check `image-processing-queue` for messages
-- **Function App**: View logs and execution history
+
+#### 1. Manual Image Upload to Azure Blob Storage
+1. **Access Azure Portal**: https://portal.azure.com
+2. **Navigate to Storage Account**: `cst8917assignment1sa`
+3. **Go to Containers**: Click "Containers" in the left menu
+4. **Select Container**: Click on `images-input` container
+5. **Upload Image**: Click "Upload" → Select any image file (JPG, PNG, etc.)
+6. **Confirm Upload**: Click "Upload" to complete
+
+**Expected Result**: Function App should automatically trigger within 1-2 minutes
+
+#### 2. Verify Function App Execution
+1. **Navigate to Function App**: `cst8917-assignment1-func`
+2. **Check Functions**: Should show `function_app` (blobTrigger)
+3. **View Logs**: Click on the function → "Monitor" → Check recent executions
+4. **Expected Log Messages**:
+   ```
+   Image uploaded: [filename]
+   Metadata extracted: [details]
+   SQL Database Save: [status]
+   Queue Send: [status]
+   Processing report: [status]
+   ```
+
+#### 3. Verify SQL Database Records
+1. **Navigate to SQL Server**: `cst8917-assignment1-sql`
+2. **Open Query Editor**: Click "Query editor"
+3. **Run Query**:
+   ```sql
+   SELECT * FROM ImageMetadata ORDER BY CreatedAt DESC;
+   ```
+4. **Expected Result**: Should show your uploaded image metadata
+
+#### 4. Verify Storage Queue Messages
+1. **Navigate to Storage Account**: `cst8917assignment1sa`
+2. **Go to Queues**: Click "Queues" in the left menu
+3. **Check Queue**: Click on `image-processing-queue`
+4. **Expected Result**: Should show processing messages
+
+#### 5. Verify Output Reports
+1. **Navigate to Storage Account**: `cst8917assignment1sa`
+2. **Go to Containers**: Click "Containers"
+3. **Check Output Container**: Click on `output` container
+4. **Expected Result**: Should contain processing reports (JSON files)
+
+#### Alternative: Using Azure Storage Explorer
+1. **Download Azure Storage Explorer**: https://azure.microsoft.com/en-us/features/storage-explorer/
+2. **Connect to Storage Account**: Add your storage account using connection string
+3. **Navigate to Container**: `images-input`
+4. **Upload Image**: Right-click → "Upload" → Select image file
+5. **Monitor Results**: Check other containers and queues for results
 
 ### KQL Query Verification (Application Insights)
 - Go to Function App → Application Insights → Logs (Analytics)
