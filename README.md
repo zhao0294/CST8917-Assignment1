@@ -19,6 +19,7 @@ This assignment implements an Azure Durable Functions pipeline for image metadat
 **Status**: ✅ **READY FOR SUBMISSION**
 **Date**: July 10, 2025
 **Student**: CST8917 Assignment 1
+**Demo Video**: [YouTube Demo](https://youtu.be/hmpAPskZWQY)
 
 ---
 
