@@ -47,9 +47,6 @@ as1/
 ├── requirements.txt         # Python dependencies (English)
 ├── local.settings.json      # Local development settings (English)
 ├── host.json                # Function app configuration (English)
-├── verify_results.py        # Verification script (English)
-├── test_azure_upload.py     # Azure testing script (English)
-├── final_test.py            # Complete system test (English)
 ├── README.md                # Comprehensive documentation (English)
 ```
 
@@ -60,9 +57,6 @@ as1/
 | `requirements.txt` | Python dependencies |
 | `local.settings.json` | Local development settings |
 | `host.json` | Function app configuration |
-| `verify_results.py` | Verification script |
-| `test_azure_upload.py` | Azure testing script |
-| `final_test.py` | Complete system test |
 | `README.md` | Main documentation |
 
 ---
@@ -142,21 +136,8 @@ Functions:
         function_app: [GET,POST] http://localhost:7071/api/function_app
 ```
 
-#### 2. Test Local Image Upload
-```bash
-# In a new terminal, run the verification script
-python verify_results.py
-```
-
-**Expected Results**:
-- ✅ Local settings configuration check
-- ✅ Function app files and dependencies check
-- ✅ SQL database connectivity test
-- ✅ Storage queue existence check
-- ✅ Blob containers verification
-
-#### 3. Manual Local Testing
-1. **Upload Test Image**: Place an image file in your local blob storage container
+#### 2. Manual Local Testing
+1. **Upload Test Image**: Place an image file in your local blob storage container (as configured in `local.settings.json`)
 2. **Monitor Terminal**: Watch the function app terminal for processing logs
 3. **Check Logs**: Look for messages like:
    ```
@@ -167,27 +148,10 @@ python verify_results.py
    Processing report: [status]
    ```
 
-#### 4. Local Verification Steps
-- **Database Check**: Verify data is inserted into local SQL database
-- **Queue Check**: Confirm messages are sent to local storage queue
-- **Output Check**: Check if processing reports are generated in output container
-
-### Python Script Verification
-- `python verify_results.py` — Checks local settings, files, SQL, queue, blob storage
-- `python test_azure_upload.py` — Uploads test image to Azure, triggers function
-- `python final_test.py` — Runs all tests and prints summary
-
-### Quick Local Testing Guide
-```bash
-# 1. Start function app
-func start
-
-# 2. In another terminal, run verification
-python verify_results.py
-
-# 3. Check results in terminal output
-# 4. Verify local database and queue manually if needed
-```
+#### 3. Local Verification Steps
+- **Database Check**: Verify data is inserted into your local SQL database (if configured)
+- **Queue Check**: Confirm messages are sent to your local storage queue
+- **Output Check**: Check if processing reports are generated in the output container
 
 ### Azure Portal Verification
 
