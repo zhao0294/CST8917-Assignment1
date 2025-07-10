@@ -16,9 +16,12 @@ This assignment implements an Azure Durable Functions pipeline for image metadat
 - ✅ **Lab 2 Integration**: Blob trigger, image processing, metadata extraction
 - ✅ **Assignment 1**: Durable Functions pipeline, error handling, local & Azure deployment, comprehensive verification, full English documentation
 
-**Status**: ✅ **READY FOR SUBMISSION**
+---
+
 **Date**: July 10, 2025
+
 **Student**: CST8917 Assignment 1
+
 **Demo Video**: [YouTube Demo](https://youtu.be/hmpAPskZWQY)
 
 ---
